@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Cluster LISA_FDR[4]</title>
+
+    <link rel="stylesheet" href="style.css">
+    
+
+    <!-- Librairie Leaflet; le JS doit être après le CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
+        <!-- Librairies d'icones-->
+    <script src="https://kit.fontawesome.com/5c3f18a241.js" crossorigin="anonymous"></script>
+    <!--script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="script/require.js"></script-->
+
+                <!-- Chargemment de la libraire D3.js -->
+
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    
+                <!-- Chargemment de la libraire annotation D3.js -->
+
+    
+    <!-- Jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+          
+    <script src="https://rawgit.com/susielu/d3-annotation/master/d3-annotation.min.js"></script>
+
+    
+
+
+    <!--script src="https://raw.githubusercontent.com/Mathiaslauber/geovis_qualite_vie_suisse/main/script/L.D3SvgOverlay.min.js"></script-->
+    <!--script>!function(t){"function"==typeof define&&define.amd?define(["leaflet","d3"],t):"object"==typeof module&&module.exports?module.exports=t(require("leaflet","d3")):t(L,d3)}(function(t,o){if(void 0===o)throw"D3 SVG Overlay for Leaflet requires D3 library loaded first";if(void 0===t)throw"D3 SVG Overlay for Leaflet requires Leaflet library loaded first";o.select("head").append("style").attr("type","text/css").text("g.d3-overlay *{pointer-events:visiblePainted;}"),t.D3SvgOverlay=t.Layer.extend({_undef:function(t){return void 0===t},_options:function(t){return this._undef(t)?this.options:(t.zoomHide=!this._undef(t.zoomHide)&&t.zoomHide,t.zoomDraw=!!this._undef(t.zoomDraw)||t.zoomDraw,this.options=t)},_disableLeafletRounding:function(){this._leaflet_round=t.Point.prototype._round,t.Point.prototype._round=function(){return this}},_enableLeafletRounding:function(){t.Point.prototype._round=this._leaflet_round},draw:function(){this._disableLeafletRounding(),this._drawCallback(this.selection,this.projection,this.map.getZoom()),this._enableLeafletRounding()},initialize:function(t,o){this._options(o||{}),this._drawCallback=t},_zoomChange:function(t){this._disableLeafletRounding();var o=this._undef(t.zoom)?this.map._zoom:t.zoom;this._zoomDiff=o-this._zoom,this._scale=Math.pow(2,this._zoomDiff),this.projection.scale=this._scale,this._shift=this.map.latLngToLayerPoint(this._wgsOrigin)._subtract(this._wgsInitialShift.multiplyBy(this._scale));var i=["translate(",this._shift.x,",",this._shift.y,") "],e=["scale(",this._scale,",",this._scale,") "];this._rootGroup.attr("transform",i.concat(e).join("")),this.options.zoomDraw&&this.draw(),this._enableLeafletRounding()},onAdd:function(i){this.map=i;var e=this;this._svg=t.svg(),i.addLayer(this._svg),this._rootGroup=o.select(this._svg._rootGroup).classed("d3-overlay",!0),this._rootGroup.classed("leaflet-zoom-hide",this.options.zoomHide),this.selection=this._rootGroup,this._pixelOrigin=i.getPixelOrigin(),this._wgsOrigin=t.latLng([0,0]),this._wgsInitialShift=this.map.latLngToLayerPoint(this._wgsOrigin),this._zoom=this.map.getZoom(),this._shift=t.point(0,0),this._scale=1,this.projection={latLngToLayerPoint:function(o,i){return i=e._undef(i)?e._zoom:i,e.map.project(t.latLng(o),i)._round()._subtract(e._pixelOrigin)},layerPointToLatLng:function(o,i){i=e._undef(i)?e._zoom:i;var n=t.point(o).add(e._pixelOrigin);return e.map.unproject(n,i)},unitsPerMeter:256*Math.pow(2,e._zoom)/40075017,map:e.map,layer:e,scale:1},this.projection._projectPoint=function(o,i){var n=e.projection.latLngToLayerPoint(new t.LatLng(i,o));this.stream.point(n.x,n.y)},this.projection.pathFromGeojson=o.geoPath().projection(o.geoTransform({point:this.projection._projectPoint})),this.projection.latLngToLayerFloatPoint=this.projection.latLngToLayerPoint,this.projection.getZoom=this.map.getZoom.bind(this.map),this.projection.getBounds=this.map.getBounds.bind(this.map),this.selection=this._rootGroup,this.draw()},getEvents:function(){return{zoomend:this._zoomChange}},onRemove:function(t){this._svg.remove()},addTo:function(t){return t.addLayer(this),this}}),t.D3SvgOverlay.version="3.0.1",t.d3SvgOverlay=function(o,i){return new t.D3SvgOverlay(o,i)}}),"undefined"!=typeof module&&module.exports&&(module.exports=L.d3SvgOverlay);</script-->
+    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="script/L.D3SvgOverlay.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+
+    <!-- Charger les librairies pour ajouter des fonds de carte ESRI vectoriels -->
+    <link rel="stylesheet" href="https://unpkg.com/mapbox-gl/dist/mapbox-gl.css" />
+    <script src="https://unpkg.com/mapbox-gl/dist/mapbox-gl.js"></script>
+    <script src="https://unpkg.com/esri-leaflet/dist/esri-leaflet.js"></script>
+    <script src="https://unpkg.com/esri-leaflet-vector/dist/esri-leaflet-vector.js"></script>
+    
+    <!-- load bootstrap 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+
+
+</head>
+
+<body>     
+<div class="englobe">
+        <div>
+
+            <div class="Titre">
+            
+        
+                <div id="rectangle">
+                    
+                    <h1> Durabilité des entreprises Européennes </h1>
+                    <h2>analyse de grappes sur les critères ESG </h2>
+                    <h3>2288 entreprises européennes 80km FDR </h3> 
+                    <!--a href="#home" class="headlink">Home</a>
+                    <a href="#news" class="headlink">News</a>
+                    <a href="#contact" class="headlink">Contact</a-->
+                
+        
+                </div>
+            </div>
+
+            <form class="form-control" id="well-form">
+
+                <input type="radio" name="well" id="ESGSCORE_COType.Fixed.80000.RS" checked="true" value="ESGSCORE_COType.Fixed.80000.RS"/>             <label for="ESGSCORE_COType.Fixed.80000.RS">ESG score</label>
+                <input type="radio" name="well" id="ENV_PILLAR_COType.Fixed.80000.RS" value="ENV_PILLAR_COType.Fixed.80000.RS"/>             <label for="ENV_PILLAR_COType.Fixed.80000.RS">Env_pillar</label>
+                <input type="radio" name="well" id="GOV_PILLAR_COType.Fixed.80000.RS" value="GOV_PILLAR_COType.Fixed.80000.RS"/>             <label for="GOV_PILLAR_COType.Fixed.80000.RS">Gov_pillar</label>
+                <input type="radio" name="well" id="SOC_PILLAR_COType.Fixed.80000.RS" value="SOC_PILLAR_COType.Fixed.80000.RS"/>     <label for="SOC_PILLAR_COType.Fixed.80000.RS">Soc_pillar</label>
+                <input type="radio" name="well" id="RESSOURCE_USE_COType.Fixed.80000.RS" value="RESSOURCE_USE_COType.Fixed.80000.RS"/>     <label for="RESSOURCE_USE_COType.Fixed.80000.RS">RessourceUse</label>
+                <input type="radio" name="well" id="EMISSIONS_COType.Fixed.80000.RS" value="EMISSIONS_COType.Fixed.80000.RS"/>             <label for="EMISSIONS_COType.Fixed.80000.RS">Emissions</label>
+                <input type="radio" name="well" id="INNOVATION_COType.Fixed.80000" value="INNOVATION_COType.Fixed.80000"/>        <label for="INNOVATION_COType.Fixed.80000">Innovation</label>
+                <input type="radio" name="well" id="COMMUNITY_COType.Fixed.80000.RS"  value="COMMUNITY_COType.Fixed.80000.RS"/>           <label for="COMMUNITY_COType.Fixed.80000.RS">Community</label>
+                <input type="radio" name="well" id="PRODUCT_RESP_COType.Fixed.80000.RS" value="PRODUCT_RESP_COType.Fixed.80000.RS"/>     <label for="PRODUCT_RESP_COType.Fixed.80000.RS">ProductResp</label>
+                <input type="radio" name="well" id="HUMANRIGHTS_COType.Fixed.80000.RS" value="HUMANRIGHTS_COType.Fixed.80000.RS"/>             <label for="HUMANRIGHTS_COType.Fixed.80000.RS">Humanrights</label>
+                <input type="radio" name="well" id="WORKFORCE_COType.Fixed.80000" value="WORKFORCE_COType.Fixed.80000"/>     <label for="WORKFORCE_COType.Fixed.80000">WorkForce</label>
+                <input type="radio" name="well" id="MANAGEMENT_COType.Fixed.80000.RS" value="MANAGEMENT_COType.Fixed.80000.RS"/>     <label for="MANAGEMENT_COType.Fixed.80000.RS">Management</label>
+                <input type="radio" name="well" id="CSR_STRATEGY_COType.Fixed.80000.RS" value="CSR_STRATEGY_COType.Fixed.80000.RS"/>             <label for="CSR_STRATEGY_COType.Fixed.80000.RS">CSRStrategy</label>
+                <input type="radio" name="well" id="ESGCOMBINED_COType.Fixed.80000.RS" value="ESGCOMBINED_COType.Fixed.80000.RS"/>             <label for="ESGCOMBINED_COType.Fixed.80000.RS">ESGCombined</label>
+                <input type="radio" name="well" id="ESGCONTROVERSIES_COType.Fixed.80000.RS" value="ESGCONTROVERSIES_COType.Fixed.80000.RS"/>             <label for="ESGCONTROVERSIES_COType.Fixed.80000.RS">Controversies</label>
+
+            
+            
+                
+            
+            </form>
+
+
+                <!-- 
+                <form class="btn-group btn-group-toggle" data-toggle="buttons" id="well-form">
+
+                    <label class="btn btn-secondary active">
+                    <input type="radio" name="controlHeatmapType" id="ESGSCORE_COType.Fixed.200000" checked="true" value="ESGSCORE_COType.Fixed.200000"/>             <label for="ESGSCORE_COType.Fixed.200000">esgscore</label>
+                    </label>
+                    <label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="ENV_PILLAR_COType.Fixed.270000" value="ENV_PILLAR_COType.Fixed.270000"/>             <label for="ENV_PILLAR_COType.Fixed.270000">Env_pillar</label>
+                </label><label class="btn btn-secondary">
+                <input type="radio" name="controlHeatmapType" id="GOV_PILLAR_COType.Fixed.200000" value="GOV_PILLAR_COType.Fixed.200000"/>             <label for="GOV_PILLAR_COType.Fixed.200000">gov_pillar</label>
+                </label><label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="SOC_PILLAR_COType.Fixed.270000" value="SOC_PILLAR_COType.Fixed.270000"/>     <label for="SOC_PILLAR_COType.Fixed.270000">soc_pillar</label>
+                </label><label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="RESSOURCE_USE_COType.Fixed.310000" value="RESSOURCE_USE_COType.Fixed.310000"/>     <label for="RESSOURCE_USE_COType.Fixed.310000">ressourceUse</label>
+                </label><label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="EMISSIONS_COType.Fixed.160000" value="EMISSIONS_COType.Fixed.160000"/>             <label for="EMISSIONS_COType.Fixed.160000">Emissions</label>
+                </label><label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="INNOVATION_COType.Fixed.270000" value="INNOVATION_COType.Fixed.270000"/>        <label for="INNOVATION_COType.Fixed.270000">Innovation</label>
+                </label><label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="COMMUNITY_COType.Fixed.235000"  value="COMMUNITY_COType.Fixed.235000"/>           <label for="COMMUNITY_COType.Fixed.235000">Community</label>
+                </label> <label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="CSR_STRATEGY_COType.Fixed.390000" value="CSR_STRATEGY_COType.Fixed.390000"/>             <label for="CSR_STRATEGY_COType.Fixed.390000">CSR Strategy</label>
+                </label><label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="ESGCOMBINED_COType.Fixed.270000" value="ESGCOMBINED_COType.Fixed.270000"/>             <label for="ESGCOMBINED_COType.Fixed.270000">ESgcombined</label>
+                </label><label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="ESGCONTROVERSIES_COType.Fixed.540000" value="ESGCONTROVERSIES_COType.Fixed.540000"/>             <label for="ESGCONTROVERSIES_COType.Fixed.540000">escocontro</label>
+                </label> <label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="HUMANRIGHTS_COType.Fixed.310000" value="HUMANRIGHTS_COType.Fixed.310000"/>             <label for="HUMANRIGHTS_COType.Fixed.310000">Humanrights</label>
+                </label> <label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="MANAGEMENT_COType.Fixed.200000" value="MANAGEMENT_COType.Fixed.200000"/>     <label for="MANAGEMENT_COType.Fixed.200000">management</label>
+                </label><label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="PRODUCT_RESP_COType.Fixed.300000" value="PRODUCT_RESP_COType.Fixed.300000"/>     <label for="PRODUCT_RESP_COType.Fixed.300000">Productresp</label>
+                </label><label class="btn btn-secondary">
+                    <input type="radio" name="controlHeatmapType" id="WORKFORCE_COType.Fixed.150000" value="WORKFORCE_COType.Fixed.150000"/>     <label for="WORKFORCE_COType.Fixed.150000">workforce</label>
+                    
+                </label>
+                </form>-->
+        
+
+            
+
+            <div id="mapdiv" class="carte-interactive"></div>
+
+                <div id="tooltip_map" class="tooltip_map">
+                    <style>
+                        .bubbles {
+                            stroke-width: 2px;
+                            stroke: rgb(248, 248, 248);
+                            opacity: 1
+                        }
+                        
+                        .bubbles:hover {
+                            stroke: black;
+                        }
+                    </style>
+            </div>
+            <div id="sidebar" class="sidebar">
+
+
+                
+                <h6>Clusters LISA</h6>
+                <h7>*Voisinnage de 80 [km] autour de chaque entité - avec standardisation et FDR</h7>
+                <!--table>
+
+                    <caption>*Voisinnage compris entre 100 et 270 [km] autour de chaque entité</caption>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">agglomération</th>
+                        <th scope="col">villes</th>
+                    </tr>
+
+                    <tr>
+                        <th scope="row"> <i>*taux [%]</i> logements vacants</th>
+                        <td scope="stat">1.83</td>
+                        <td scope="stat">1.79</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><i>*Total de</i> logements</th>
+                        <td scope="stat">1'922'676</td>
+                        <td scope="stat">707'749</td>
+                    </tr>
+
+                </table-->
+
+
+                
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+    <!-- chargement d3.js
+    de topojson pour gérer la couche suisse 
+    et de l'échelle de couleur -->
+
+
+    <!--Chargement de Classybrew pour la mise en classe avec la méthode jenks-->
+    <script src="https://cdn.rawgit.com/christiankaiser/classybrew/b8ca77d5a6b7eef5586f5148c36ee937aa1bacfb/build/classybrew.min.js"></script>
+
+    <!-- Lien vers les scripts des différentes visualisations-->
+    <script src="main.js"></script>
+    <script src="script/d3svgoverlaymap_symbol.js"></script>
+    
+    
+</body>
+
+</html>
